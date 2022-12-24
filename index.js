@@ -23,12 +23,13 @@ app.use(express.json())
 // Public path
 app.use(express.static("public"))
 
-// Session
-const session = require("./config/session")
-app.use(session)
-
 // Flash messages
 app.use(flash())
+
+// Middlewares
+// Session
+const sessionMiddleware = require("./middlewares/sessionMiddleware")
+app.use(sessionMiddleware)
 
 // Set session to res
 const setSessionMiddleware = require("./middlewares/setSessionMiddleware")
@@ -36,7 +37,7 @@ app.use(setSessionMiddleware)
 
 // Auth routes 
 const authRoutes = require("./routes/authRoutes")
-app.use("/auth", authRoutes)
+app.use("/", authRoutes)
 
 // Thoughts routes 
 const thoughtRoutes = require("./routes/thoughtRoutes")

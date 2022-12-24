@@ -24,16 +24,18 @@
             <a href="/">Pensamentos</a>
           </li>
           <li>
-            <a href="/auth/login">Entrar</a>
+            <a href="/login">Entrar</a>
           </li>
           <li>
-            <a href="/auth/register">Registrar</a>
+            <a href="/register">Registrar</a>
           </li>
         </ul>
       </nav>
     </header>
 
     <main>
+      {{!-- Flash messages --}}
+      {{> messages}}
       {{{body}}}
     </main>
 
