@@ -1,8 +1,10 @@
-<form action="/register" method="POST" class="c-form">
+<form action="{{action}}" method="POST" class="c-form">
+  {{#if showFields}}
   <div class="c-form__input">
     <label for="name">Nome: </label>
     <input type="text" name="name" id="name" required>
   </div>
+  {{/if}}
   <div class="c-form__input">
     <label for="email">Email: </label>
     <input type="email" name="email" id="email" required>
@@ -11,9 +13,11 @@
     <label for="password">Senha: </label>
     <input type="password" name="password" id="password" required>
   </div>
+  {{#if showFields}}
   <div class="c-form__input">
-    <label for="confirm_password">Nome: </label>
+    <label for="confirm_password">Confirmar senha: </label>
     <input type="password" name="confirm_password" id="confirm_password" required>
   </div>
-  <input class="btn" type="submit" value="Cadastrar">
+  {{/if}}
+  <input class="btn" type="submit" value="{{btnText}}">
 </form>

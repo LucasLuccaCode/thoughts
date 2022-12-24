@@ -3,10 +3,10 @@ const bcrypt = require("bcryptjs")
 
 module.exports = class AuthControllers {
   static showRegisterPage(req, res) {
-    res.render("auth/register")
+    res.render("auth/register", { btnText: "Cadastrar", action: "/register", showFields: true })
   }
 
-  static logout(req, res){
+  static logout(req, res) {
     req.session.destroy()
     res.redirect("/login")
   }
@@ -51,5 +51,33 @@ module.exports = class AuthControllers {
     } catch (err) {
       console.log(err)
     }
+  }
+
+  static showLoginPage(req, res) {
+    res.render("auth/login", { btnText: "Logar", action: "/login" })
+  }
+
+  static async loginUser(req, res) {
+    const { email, password } = req.body
+
+    // verificar se email existe
+    const user = await User.findOne({ raw: true, where: { email: email } })
+    if (!user) {
+      req.flash("error", "Usuário e/ou senha inválidos!")
+      req.session.save(() => res.render("auth/login"))
+      return
+    }
+
+    // checar senhas
+    const passwordsMatch = bcrypt.compareSync(password, user.password)
+    if (!password || !passwordsMatch) {
+      req.flash("error", "Usuário e/ou senha inválidos!")
+      req.session.save(() => res.render("auth/login"))
+      return
+    }
+
+    // Salvar sessão do usuário
+    req.session.userId = user.id
+    req.session.save(() => res.redirect("/"))
   }
 }
