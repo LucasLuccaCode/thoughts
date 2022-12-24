@@ -34,10 +34,15 @@ app.use(flash())
 const setSessionMiddleware = require("./middlewares/setSessionMiddleware")
 app.use(setSessionMiddleware)
 
+// Thoughts routes 
+const thoughtRoutes = require("./routes/thoughtRoutes")
+app.use("/thoughts", thoughtRoutes)
+
+// Though controllers
+const ThoughControllers = require("./controllers/ThoughControllers")
+
 // Root route
-app.get("/", (req, res) => {
-  res.render("home")
-})
+app.get("/", ThoughControllers.showThoughts)
 
 // 404 route
 app.use("*", (req, res) => {
