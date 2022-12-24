@@ -7,4 +7,6 @@ router.route("/register")
   .get(AuthControllers.showRegisterPage)
   .post(AuthControllers.registerUser)
 
+router.get("/logout", AuthControllers.logout)
+
 module.exports = router
