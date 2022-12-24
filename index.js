@@ -34,6 +34,10 @@ app.use(flash())
 const setSessionMiddleware = require("./middlewares/setSessionMiddleware")
 app.use(setSessionMiddleware)
 
+// Auth routes 
+const authRoutes = require("./routes/authRoutes")
+app.use("/auth", authRoutes)
+
 // Thoughts routes 
 const thoughtRoutes = require("./routes/thoughtRoutes")
 app.use("/thoughts", thoughtRoutes)
