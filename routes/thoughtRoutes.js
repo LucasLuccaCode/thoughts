@@ -14,4 +14,6 @@ router.route("/dashboard/add")
   .get(checkAuthMiddleware, ThoughControllers.showThoughtForm)
   .post(checkAuthMiddleware, ThoughControllers.createThought)
 
+router.post("/remove", ThoughControllers.deleteThought)
+
 module.exports = router

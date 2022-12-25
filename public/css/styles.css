@@ -327,8 +327,8 @@ footer span {
 }
 
 .c-messages .success {
-  color: #4a4a50;
-  background: #30ff30;
+  color: #fff;
+  background: #0a76a8;
 }
 
 .c-auth h1 {
@@ -370,7 +370,7 @@ footer span {
   display: flex;
   justify-content: space-between;
   border-bottom: 2px solid var(--details-color);
-  padding: .7rem 0;
+  padding: .8rem 0;
 }
 
 .c-dashboard__thoughts__actions {
@@ -381,11 +381,6 @@ footer span {
 .c-dashboard__thoughts h3 {
   font-size: .9rem;
   color: var(--details-color);
-}
-
-.c-dashboard__thoughts__actions input.btn {
-  background: var(-clr);
-  color: var(-clr);
 }
 
 .c-dashboard__thoughts__actions a {

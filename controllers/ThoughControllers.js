@@ -46,4 +46,13 @@ module.exports = class ThoughControllers {
       console.log(err)
     }
   }
+
+  static async deleteThought(req, res){
+    const  {thoughtId} = req.body
+    const userId = req.session.userId
+
+    await Thought.destroy({ where: { id: thoughtId, UserId: userId }})
+    req.flash("success", "Pensamento removido com sucesso!")
+    req.session.save(()=> res.redirect("/thoughts/dashboard"))
+  }
 }
