@@ -20,4 +20,9 @@
   </div>
   {{/if}}
   <input class="btn" type="submit" value="{{btnText}}">
+  {{#if showFields}}
+  <p>Tem uma conta? <a href="/login">Clique aqui</a></p>
+  {{else}}
+  <p>Não tem uma conta? <a href="/register">Clique aqui</a></p>
+  {{/if}}
 </form>

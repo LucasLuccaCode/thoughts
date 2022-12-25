@@ -14,7 +14,7 @@ module.exports = session({
   }),
   cookie: {
     secure: false,
-    maxAge: 360000, // 1 dia em ms
+    maxAge: 60 * 60 * 24 * 1000, // 1 dia em ms
     httpOnly: true
   }
 })

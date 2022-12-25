@@ -125,6 +125,7 @@ header li a:hover {
 main {
   flex: 1;
   padding-bottom: .5em;
+  padding: 0 var(--margin-h);
 }
 
 .c-form {
@@ -167,6 +168,18 @@ main {
 .c-form__input textarea {
   width: 100%;
   height: 4rem;
+}
+
+.c-form p {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  font-size: .7rem;
+  color: #aaaab0;
+}
+
+.c-form p a {
+  color: var(--details-color);
 }
 
 /* THOUGHTS  */
@@ -281,7 +294,7 @@ footer {
   border-top: 1px solid var(--details-color);
 }
 
-footer p {  
+footer p {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -322,4 +335,60 @@ footer span {
   text-align: left;
   padding-left: .5rem;
   border-left: 2px solid var(--details-color);
+}
+
+/* DASHBOARD */
+
+.c-dashboard {
+  width: 100%;
+}
+
+.c-dashboard__title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.c-dashboard h1 {
+  font-size: 1rem;
+  padding-left: .5rem;
+  border-left: 2px solid var(--details-color);
+}
+
+.c-dashboard h2 {
+  margin-top: 1rem;
+  font-size: .9rem;
+}
+
+.c-dashboard__thoughts {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+
+.c-dashboard__thoughts li {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid var(--details-color);
+  padding: .7rem 0;
+}
+
+.c-dashboard__thoughts__actions {
+  display: flex;
+  gap: .5rem;
+}
+
+.c-dashboard__thoughts h3 {
+  font-size: .9rem;
+  color: var(--details-color);
+}
+
+.c-dashboard__thoughts__actions input.btn {
+  background: var(-clr);
+  color: var(-clr);
+}
+
+.c-dashboard__thoughts__actions a {
+  background: transparent;
+  color: var(--details-color);
 }

@@ -1,9 +1,17 @@
 const express = require("express")
 const router = express.Router()
 
+// Middleware
+const checkAuthMiddleware = require("../middlewares/checkAuthMiddleware")
+
 // Controller
 const ThoughControllers = require("../controllers/ThoughControllers")
 
 router.get("/", ThoughControllers.showThoughts)
+router.get("/dashboard", checkAuthMiddleware, ThoughControllers.dashboard)
+
+router.route("/dashboard/add")
+  .get(checkAuthMiddleware, ThoughControllers.showThoughtForm)
+  .post(checkAuthMiddleware, ThoughControllers.createThought)
 
 module.exports = router

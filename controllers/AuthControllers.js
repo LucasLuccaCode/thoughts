@@ -14,7 +14,7 @@ module.exports = class AuthControllers {
   static async registerUser(req, res) {
     const { name, email, password, confirm_password } = req.body
 
-    // verificar se email existe
+    // Verificar se email existe
     const existsEmail = await User.findOne({ raw: true, where: { email: email } })
     if (existsEmail) {
       req.flash("error", "Email informado já está em uso!")
@@ -22,7 +22,7 @@ module.exports = class AuthControllers {
       return
     }
 
-    // checar senhas
+    // Checar senhas
     const passwordsMatch = password === confirm_password
     if (!password || !passwordsMatch) {
       req.flash("error", "As senhas não conferem!")
@@ -30,7 +30,7 @@ module.exports = class AuthControllers {
       return
     }
 
-    // criptografar senhas
+    // Criptografar senhas
     const salt = bcrypt.genSaltSync(12)
     const passwordHash = bcrypt.hashSync(password, salt)
 
@@ -42,12 +42,12 @@ module.exports = class AuthControllers {
     }
 
     try {
-      // registrar usuário
+      // Registrar usuário
       const createdUser = await User.create(user, { raw: true })
 
       // Salvar sessão do usuário
       req.session.userId = createdUser.id
-      req.session.save(() => res.redirect("/"))
+      req.session.save(() => res.redirect("/thoughts/dashboard"))
     } catch (err) {
       console.log(err)
     }
@@ -60,7 +60,7 @@ module.exports = class AuthControllers {
   static async loginUser(req, res) {
     const { email, password } = req.body
 
-    // verificar se email existe
+    // Verificar se email existe
     const user = await User.findOne({ raw: true, where: { email: email } })
     if (!user) {
       req.flash("error", "Usuário e/ou senha inválidos!")
@@ -68,7 +68,7 @@ module.exports = class AuthControllers {
       return
     }
 
-    // checar senhas
+    // Checar senhas
     const passwordsMatch = bcrypt.compareSync(password, user.password)
     if (!password || !passwordsMatch) {
       req.flash("error", "Usuário e/ou senha inválidos!")
@@ -78,6 +78,6 @@ module.exports = class AuthControllers {
 
     // Salvar sessão do usuário
     req.session.userId = user.id
-    req.session.save(() => res.redirect("/"))
+    req.session.save(() => res.redirect("/thoughts/dashboard"))
   }
 }
