@@ -1,4 +1,4 @@
-<div class="c-dashboard">
+<div class="c-dashboard page">
   <div class="c-dashboard__title">
     <h1>Dashboard</h1>
     <a class="btn" href="/thoughts/dashboard/add">Adicionar pensamento</a>
@@ -20,4 +20,7 @@
     </li>
     {{/each}}
   </ul>
+  {{#if emptyThoughts}}
+    <p class="empty">Nenhum pensamento postado, <a href="/thoughts/dashboard/add">clique aqui</a> para adicionar um.</p>
+  {{/if}}
 </div>

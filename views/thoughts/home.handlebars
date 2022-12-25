@@ -1,1 +1,54 @@
-<h1>Aqui aparecerão todos os seus pensamentos...</h1>
+<div class="c-home__thoughts">
+  <div class="c-home__thoughts__title max-width">
+    {{#if search}}
+    <h1>Você está buscando por: <span>{{search}}</span></h1>
+    {{else}}
+    <h1>Feed de pensamentos</h1>
+    {{/if}}
+
+    <form class="c-home__thoughts__search" action="/" method="GET">
+      <input type="search" name="search" placeholder="Procure por um pensamento">
+      <input class="btn" type="submit" value="Buscar">
+    </form>
+
+    <div class="c-home__thoughts__order">
+      <span>Ordenar por:</span>
+
+      <form action="/">
+        <input type="hidden" name="search" value="{{this.search}}">
+        <input type="hidden" name="order" value="new">
+        <button type="submit">
+          <i class="bi bi-arrow-up"></i>
+        </button>
+      </form>
+      <form action="/">
+        <input type="hidden" name="search" value="{{this.search}}">
+        <input type="hidden" name="order" value="old">
+        <button type="submit">
+          <i class="bi bi-arrow-down"></i>
+        </button>
+      </form>
+      <a href="/">Limpar</a>
+    </div>
+  </div>
+
+  <div class="c-home__thoughts__details max-width">
+    {{#each thoughts}}
+    <figure>
+      <blockquote>&#8220;{{this.title}}&#8221;</blockquote>
+      <figcaption>por <span>{{this.User.name}}</span></figcaption>
+      <div class="c-home__thoughts__actions">
+        <div class="like">
+          <i class="bi bi-heart"></i>
+        </div>
+        <div class="like">
+          <i class="bi bi-chat-dots"></i>
+        </div>
+        <div class="like">
+          <i class="bi bi-star"></i>
+        </div>
+      </div>
+    </figure>
+    {{/each}}
+  </div>
+</div>

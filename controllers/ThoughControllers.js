@@ -1,9 +1,21 @@
 const User = require("../models/User")
+const { Op } = require("sequelize")
 const Thought = require("../models/Thought")
 
 module.exports = class ThoughControllers {
   static async showThoughts(req, res) {
-    res.render("thoughts/home")
+    const search = req.query.search ? req.query.search : ""
+
+    let thoughtsData = await Thought.findAll({
+      include: User,
+      where: {
+        title: { [Op.like]: `%${search}%` }
+      }
+    })
+
+    const thoughts = thoughtsData.map(result => result.get({ plain: true }))
+
+    res.render("thoughts/home", { thoughts, search })
   }
 
   static async dashboard(req, res) {
@@ -22,10 +34,12 @@ module.exports = class ThoughControllers {
       res.redirect("/login")
     }
 
+
     // Treat thoughts
     const thoughts = user.Thoughts.map(result => result.dataValues)
+    const emptyThoughts = !Boolean(thoughts.length)
 
-    res.render("thoughts/dashboard", { thoughts })
+    res.render("thoughts/dashboard", { thoughts, emptyThoughts })
   }
 
 
@@ -60,8 +74,8 @@ module.exports = class ThoughControllers {
       raw: true
     })
 
-    res.render("thoughts/edit", { 
-      thought, 
+    res.render("thoughts/edit", {
+      thought,
       action: `/thoughts/edit/${thoughtId}`,
       btnText: "Atualizar"
     })
