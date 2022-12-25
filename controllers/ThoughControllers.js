@@ -16,21 +16,25 @@ module.exports = class ThoughControllers {
       include: Thought,
       plain: true,
     });
-    
+
     // Check if exists user
     if (!user) {
       res.redirect("/login")
     }
 
     // Treat thoughts
-    const thoughts = user.Thoughts.map( result => result.dataValues)
+    const thoughts = user.Thoughts.map(result => result.dataValues)
 
     res.render("thoughts/dashboard", { thoughts })
   }
 
 
-  static async showThoughtForm(req, res) {
-    res.render("thoughts/create")
+  static async showCreateThought(req, res) {
+    res.render("thoughts/create", {
+      thought: {},
+      action: "/thoughts/dashboard/add",
+      btnText: "Publicar"
+    })
   }
 
   static async createThought(req, res) {
@@ -47,12 +51,45 @@ module.exports = class ThoughControllers {
     }
   }
 
-  static async deleteThought(req, res){
-    const  {thoughtId} = req.body
-    const userId = req.session.userId
+  static async showEditThought(req, res) {
+    const { thoughtId } = req.params
+    const UserId = req.session.userId
 
-    await Thought.destroy({ where: { id: thoughtId, UserId: userId }})
+    const thought = await Thought.findOne({
+      where: { id: thoughtId, UserId },
+      raw: true
+    })
+
+    res.render("thoughts/edit", { 
+      thought, 
+      action: `/thoughts/edit/${thoughtId}`,
+      btnText: "Atualizar"
+    })
+  }
+
+  static async updateThought(req, res) {
+    const { thoughtId, title } = req.body
+    const UserId = req.session.userId
+
+    const thought = {
+      title
+    }
+
+    try {
+      await Thought.update(thought, { where: { id: thoughtId, UserId } })
+      req.flash("success", "Pensamento atualizado!")
+      req.session.save(() => res.redirect("/thoughts/dashboard"))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  static async deleteThought(req, res) {
+    const { thoughtId } = req.body
+    const UserId = req.session.userId
+
+    await Thought.destroy({ where: { id: thoughtId, UserId } })
     req.flash("success", "Pensamento removido com sucesso!")
-    req.session.save(()=> res.redirect("/thoughts/dashboard"))
+    req.session.save(() => res.redirect("/thoughts/dashboard"))
   }
 }

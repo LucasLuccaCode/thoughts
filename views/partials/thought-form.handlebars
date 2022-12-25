@@ -1,6 +1,7 @@
-<form action="/thoughts/dashboard/add" method="POST" class="c-form max-width">
+<form action="{{action}}" method="POST" class="c-form max-width">
+  <input type="hidden" name="thoughtId" value="{{thought.id}}">
   <div class="c-form__input">
-    <input type="text" name="title" placeholder="Digite seu pensamento aqui...">
+    <textarea name="title" placeholder="Digite seu pensamento aqui..." autofocus>{{thought.title}}</textarea>
   </div>
-  <input class="btn" type="submit" value="Criar pensamento">
+  <input class="btn" type="submit" value="{{btnText}}">
 </form>

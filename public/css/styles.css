@@ -168,6 +168,7 @@ main {
 .c-form__input textarea {
   width: 100%;
   height: 4rem;
+  resize: none;
 }
 
 .c-form p {
@@ -350,25 +351,26 @@ footer span {
 }
 
 .c-dashboard h1 {
-  font-size: 1rem;
+  font-size: 1.1rem;
   padding-left: .5rem;
   border-left: 2px solid var(--details-color);
 }
 
 .c-dashboard h2 {
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   font-size: .9rem;
 }
 
 .c-dashboard__thoughts {
   display: flex;
   flex-direction: column;
-  margin-top: 1rem;
+  margin-top: .5rem;
 }
 
 .c-dashboard__thoughts li {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   border-bottom: 2px solid var(--details-color);
   padding: .8rem 0;
 }
@@ -379,8 +381,13 @@ footer span {
 }
 
 .c-dashboard__thoughts h3 {
-  font-size: .9rem;
+  font-size: .8rem;
   color: var(--details-color);
+}
+
+.c-dashboard__thoughts__actions a,
+.c-dashboard__thoughts__actions input[type='submit'] {
+  font-size: .5rem;
 }
 
 .c-dashboard__thoughts__actions a {
