@@ -8,7 +8,7 @@ const checkAuthMiddleware = require("../middlewares/checkAuthMiddleware")
 const ThoughControllers = require("../controllers/ThoughControllers")
 
 router.get("/", ThoughControllers.showThoughts)
-router.get("/dashboard", checkAuthMiddleware, ThoughControllers.dashboard)
+router.get("/dashboard", checkAuthMiddleware, ThoughControllers.showDashboard)
 
 router.route("/dashboard/add")
   .get(checkAuthMiddleware, ThoughControllers.showCreateThought)

@@ -1,11 +1,11 @@
 const { DataTypes } = require("sequelize")
-
 const db = require("../db/connection")
 
 // Models
+const Thought = require("./Thought")
 const User = require("./User")
 
-const Thought = db.define("thought", {
+const Comment = db.define("comment", {
   content: {
     type: DataTypes.STRING,
     allowNull: false
@@ -15,16 +15,27 @@ const Thought = db.define("thought", {
   timestamps: true
 })
 
-User.hasMany(Thought, {
-  foreignKey: "userId",
-  as: "thoughts",
+Thought.hasMany(Comment, {
+  foreignKey: "thoughtId",
+  as: "comments",
   onDelete: "CASCADE",
   onUpdate: "CASCADE"
 })
 
-Thought.belongsTo(User, {
+User.hasMany(Comment, {
+  foreignKey: "userId",
+  onDelete: "CASCADE",
+  onUpdate: "CASCADE"
+})
+
+Comment.belongsTo(Thought, {
+  foreignKey: "thoughtId",
+  as: "post"
+})
+
+Comment.belongsTo(User, {
   foreignKey: "userId",
   as: "author"
 })
 
-module.exports = Thought
+module.exports = Comment

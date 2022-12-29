@@ -1,0 +1,52 @@
+.c-dashboard {
+  width: 100%;
+}
+
+.c-dashboard__title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.c-dashboard h2 {
+  margin-top: 1.5rem;
+  font-size: .9rem;
+}
+
+/* THOUGHTS */
+.c-dashboard__thoughts {
+  display: flex;
+  flex-direction: column;
+  margin-top: .5rem;
+}
+
+.c-dashboard__thoughts li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: .5rem;
+  border-bottom: 2px solid var(--details-color);
+  padding: .8rem 0;
+}
+
+/* THOUGHTS ACTIONS */
+.c-dashboard__thoughts__actions {
+  display: flex;
+  gap: .5rem;
+}
+
+.c-dashboard__thoughts h3 {
+  font-size: .8rem;
+  color: var(--details-color);
+  font-style: italic;
+}
+
+.c-dashboard__thoughts__actions a.btn,
+.c-dashboard__thoughts__actions input[type='submit'] {
+  font-size: .5rem;
+}
+
+.c-dashboard__thoughts__actions a.btn {
+  background: transparent;
+  color: var(--details-color);
+}

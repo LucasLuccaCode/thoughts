@@ -9,7 +9,7 @@
   <ul class="c-dashboard__thoughts">
     {{#each thoughts}}
     <li>
-      <h3>{{this.title}}</h3>
+      <h3>&#8220;{{this.content}}&#8220;</h3>
       <div class="c-dashboard__thoughts__actions">
         <a class="btn" href="/thoughts/edit/{{this.id}}">Editar</a>
         <form action="/thoughts/remove" method="POST">
@@ -21,6 +21,6 @@
     {{/each}}
   </ul>
   {{#if emptyThoughts}}
-    <p class="empty">Nenhum pensamento postado, <a href="/thoughts/dashboard/add">clique aqui</a> para adicionar um.</p>
+    <p class="empty">Nenhum pensamento publicado, <a href="/thoughts/dashboard/add">clique aqui</a> para adicionar um.</p>
   {{/if}}
 </div>

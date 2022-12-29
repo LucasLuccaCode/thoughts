@@ -4,8 +4,8 @@ const { Sequelize } = require("sequelize")
 
 const sequelize = new Sequelize(
   "THOUGHTS",
-  process.env.MYSQL_USER,
-  process.env.MYSQL_PASSWORD,
+  process.env.DB_USER,
+  process.env.DB_PASSWORD,
   {
     host: "localhost",
     dialect: "mysql"
@@ -15,7 +15,7 @@ const sequelize = new Sequelize(
 try {
   sequelize.authenticate()
   console.log("Conexão com mysql estabelecida...")
-} catch(err){
+} catch (err) {
   console.log("Erro ao conectar com o mysql: ", err)
 }
 

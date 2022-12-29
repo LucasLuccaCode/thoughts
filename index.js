@@ -5,12 +5,13 @@ const flash = require("express-flash")
 const app = express()
 const PORT = 3000
 
-// Connection with mysql
+// Sequelize connection with database
 const connection = require("./db/connection")
 
 // Models 
 const User = require("./models/User")
 const Thought = require("./models/Thought")
+const Comment = require("./models/Comment")
 
 // Template engine
 app.engine("handlebars", exphbs.engine())
@@ -20,18 +21,17 @@ app.set("view engine", "handlebars")
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
-// Public path
+// Path for statics files
 app.use(express.static("public"))
 
 // Flash messages
 app.use(flash())
 
-// Middlewares
-// Session
+// Session middleware
 const sessionMiddleware = require("./middlewares/sessionMiddleware")
 app.use(sessionMiddleware)
 
-// Set session to res
+// Set session to res middleware
 const setSessionMiddleware = require("./middlewares/setSessionMiddleware")
 app.use(setSessionMiddleware)
 
@@ -42,6 +42,10 @@ app.use("/", authRoutes)
 // Thoughts routes 
 const thoughtRoutes = require("./routes/thoughtRoutes")
 app.use("/thoughts", thoughtRoutes)
+
+// Comment routes 
+const commentRoutes = require("./routes/commentRoutes")
+app.use("/comments", commentRoutes)
 
 // Though controllers
 const ThoughControllers = require("./controllers/ThoughControllers")
@@ -54,9 +58,9 @@ app.use("*", (req, res) => {
   res.status(404).render("404")
 })
 
-// Sync settings and models with database
+// Sync models schema with database
 connection
   // .sync({ force: true }) // Forçar a recriar tabelas e relacionamentos
   .sync()
-  .then(() => app.listen(PORT, () => console.log(`Server running on port ${PORT}`)))
+  .then(() => app.listen(PORT, () => console.log(`Server listening on port ${PORT}`)))
   .catch(err => console.log(err))

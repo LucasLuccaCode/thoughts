@@ -7,7 +7,7 @@
     {{/if}}
 
     <form class="c-home__thoughts__search" action="/" method="GET">
-      <input type="search" name="search" placeholder="Procure por um pensamento">
+      <input type="search" name="search" value="{{search}}" placeholder="Procure por um pensamento">
       <input class="btn" type="submit" value="Buscar">
     </form>
 
@@ -32,11 +32,11 @@
     </div>
   </div>
 
-  <div class="c-home__thoughts__details max-width">
+  <ul class="c-home__thoughts__posts max-width">
     {{#each thoughts}}
-    <figure>
-      <blockquote>&#8220;{{this.title}}&#8221;</blockquote>
-      <figcaption>por <span>{{this.User.name}}</span></figcaption>
+    <li>
+      <h2>&#8220;{{this.content}}&#8221;</h2>
+      <h3>by <span>{{this.author.name}}</span></h3>
       <div class="c-home__thoughts__actions">
         <div class="like">
           <i class="bi bi-heart"></i>
@@ -48,7 +48,7 @@
           <i class="bi bi-star"></i>
         </div>
       </div>
-    </figure>
+    </li>
     {{/each}}
-  </div>
+  </ul>
 </div>

@@ -1,9 +1,16 @@
 const User = require("../models/User")
 const bcrypt = require("bcryptjs")
 
+// Model
+const Thought = require("../models/Thought")
+
+// Config
+const renderRegisterOptions = { btnText: "Cadastrar", action: "/register", showFields: true }
+const renderLoginOptions = { btnText: "Logar", action: "/login" }
+
 module.exports = class AuthControllers {
   static showRegisterPage(req, res) {
-    res.render("auth/register", { btnText: "Cadastrar", action: "/register", showFields: true })
+    res.render("auth/register", renderRegisterOptions)
   }
 
   static logout(req, res) {
@@ -15,10 +22,13 @@ module.exports = class AuthControllers {
     const { name, email, password, confirm_password } = req.body
 
     // Verificar se email existe
-    const existsEmail = await User.findOne({ raw: true, where: { email: email } })
+    const existsEmail = await User.findOne({
+      where: { email }
+    })
+
     if (existsEmail) {
       req.flash("error", "Email informado já está em uso!")
-      req.session.save(() => res.render("auth/register"))
+      req.session.save(() => res.render("auth/register", renderRegisterOptions))
       return
     }
 
@@ -26,7 +36,7 @@ module.exports = class AuthControllers {
     const passwordsMatch = password === confirm_password
     if (!password || !passwordsMatch) {
       req.flash("error", "As senhas não conferem!")
-      req.session.save(() => res.render("auth/register"))
+      req.session.save(() => res.render("auth/register", renderRegisterOptions))
       return
     }
 
@@ -43,7 +53,7 @@ module.exports = class AuthControllers {
 
     try {
       // Registrar usuário
-      const createdUser = await User.create(user, { raw: true })
+      const createdUser = await User.create(user)
 
       // Salvar sessão do usuário
       req.session.userId = createdUser.id
@@ -54,7 +64,7 @@ module.exports = class AuthControllers {
   }
 
   static showLoginPage(req, res) {
-    res.render("auth/login", { btnText: "Logar", action: "/login" })
+    res.render("auth/login", renderLoginOptions)
   }
 
   static async loginUser(req, res) {
@@ -64,7 +74,7 @@ module.exports = class AuthControllers {
     const user = await User.findOne({ raw: true, where: { email: email } })
     if (!user) {
       req.flash("error", "Usuário e/ou senha inválidos!")
-      req.session.save(() => res.render("auth/login"))
+      req.session.save(() => res.render("auth/login", renderLoginOptions))
       return
     }
 
@@ -72,7 +82,7 @@ module.exports = class AuthControllers {
     const passwordsMatch = bcrypt.compareSync(password, user.password)
     if (!password || !passwordsMatch) {
       req.flash("error", "Usuário e/ou senha inválidos!")
-      req.session.save(() => res.render("auth/login"))
+      req.session.save(() => res.render("auth/login", renderLoginOptions))
       return
     }
 

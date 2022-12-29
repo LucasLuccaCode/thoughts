@@ -1,0 +1,18 @@
+.c-messages p {
+  font-weight: bold;
+  font-size: .7rem;
+  text-align: center;
+  border-radius: .3rem;
+  margin-bottom: 1rem;
+  padding: .4rem .5rem;
+}
+
+.c-messages .error {
+  color: #ffefef;
+  background: #ff3030;
+}
+
+.c-messages .success {
+  color: #fff;
+  background: #0a76a8;
+}
