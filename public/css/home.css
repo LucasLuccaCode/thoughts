@@ -79,7 +79,7 @@
   margin-top: 1rem;
 }
 
-.c-home__thoughts__posts li {
+.c-home__thoughts__posts > li {
   border-radius: .3rem;
   box-shadow: 0px 1px 1px 2px rgba(255, 255, 255, .1);
   background: rgba(255, 255, 255, .05);
@@ -114,26 +114,29 @@
   border-top: 2px solid rgba(255, 255, 255, .05);
 }
 
-.c-home__thoughts__actions div {
+.c-home__thoughts__actions li {
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 1.3rem;
-  height: 1.3rem;
   border-radius: 50px;
-  padding: .2rem;
-  border-radius: 50px;
+  transition: .3s ease;
 }
 
-.c-home__thoughts__actions div:hover {
+.c-home__thoughts__actions li:hover {
   background: rgba(255, 255, 255, .05);
 }
 
-.c-home__thoughts__actions i {
+.c-home__thoughts__actions li a {
+  display: flex;
+  align-items: center;
+  gap: .3rem;
   font-size: .7rem;
+  color: #cacad0;
+  padding: .2rem .6rem;
+  transition: .3s ease;
 }
 
-.c-home__thoughts__actions div:hover i {
+.c-home__thoughts__actions li:hover a {
   color: var(--details-color);
 }

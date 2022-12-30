@@ -24,8 +24,9 @@ module.exports = class ThoughControllers {
 
 
     const thoughts = thoughtsData.map(thought => thought.get({ plain: true }))
+    const emptyThoughts = !Boolean(thoughts.length)
 
-    res.render("thoughts/home", { thoughts, search })
+    res.render("thoughts/home", { thoughts, search, emptyThoughts })
   }
 
   static async showDashboard(req, res) {

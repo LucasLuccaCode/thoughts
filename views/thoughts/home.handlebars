@@ -37,18 +37,30 @@
     <li>
       <h2>&#8220;{{this.content}}&#8221;</h2>
       <h3>by <span>{{this.author.name}}</span></h3>
-      <div class="c-home__thoughts__actions">
-        <div class="like">
-          <i class="bi bi-heart"></i>
-        </div>
-        <div class="like">
-          <i class="bi bi-chat-dots"></i>
-        </div>
-        <div class="like">
-          <i class="bi bi-star"></i>
-        </div>
-      </div>
+      <ul class="c-home__thoughts__actions">
+        <li class="like">
+          <a href="/thoughts/{{this.id}}/like">
+            <i class="bi bi-heart"></i>
+            <span>0</span>
+          </a>
+        </li>
+        <li class="comments">
+          <a href="/thoughts/{{this.id}}/comments">
+            <i class="bi bi-chat-dots"></i>
+            <span>0</span>
+          </a>
+        </li>
+        <li class="favorite">
+          <a href="/thoughts/{{this.id}}/favorite">
+            <i class="bi bi-star"></i>
+            <span>0</span>
+          </a>
+        </li>
+      </ul>
     </li>
     {{/each}}
   </ul>
+  {{#if emptyThoughts}}
+  <p class="empty">Nenhum pensamento publicado ainda...</p>
+  {{/if}}
 </div>
