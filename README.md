@@ -1,6 +1,6 @@
 # Thoughts
 
-### Aplicação de servidor onde é utilizado Express + Sequelize(Mysql) + Handlebars, para construir uma aplicação de publicações de pensamentos
+### Aplicação server-side-rendering onde é utilizado Express + Sequelize(Mysql) + Handlebars, para construir uma aplicação de publicações de pensamentos
 
 <br>
 
